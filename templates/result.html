@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exam Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="card">
+        <h1>Exam Result</h1>
+        <h2>Congratulations, {{ student_name }}!</h2>
+        <p>Your score: {{ score }} / {{ total }}</p>
+        <p>Percentage: {{ (score / total * 100)|round|int if total else 0 }}%</p>
+        <a class="button" href="/">Back to Home</a>
+        <a class="button" href="/results">View All Results</a>
+    </main>
+</body>
+</html>

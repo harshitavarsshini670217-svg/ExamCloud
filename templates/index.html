@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExamCloud</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>ExamCloud</h1>
+        <p>Cloud-Based Examination System</p>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/results">Results</a>
+            <a href="/cloud-models">Cloud Models</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Available Examinations</h2>
+
+        {% for exam in exams %}
+        <section class="card">
+            <h3>{{ exam.title }}</h3>
+            <p>{{ exam.description }}</p>
+            <a class="button" href="{{ url_for('exam', exam_id=exam.id) }}">
+                Start Exam
+            </a>
+        </section>
+        {% else %}
+        <p>No exams are available.</p>
+        {% endfor %}
+    </main>
+</body>
+</html>

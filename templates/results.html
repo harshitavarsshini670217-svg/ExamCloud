@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exam Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Previous Exam Results</h1>
+
+        <table>
+            <tr>
+                <th>Student</th>
+                <th>Exam</th>
+                <th>Score</th>
+                <th>Percentage</th>
+            </tr>
+
+            {% for r in results %}
+            <tr>
+                <td>{{ r.student_name }}</td>
+                <td>{{ r.title }}</td>
+                <td>{{ r.score }} / {{ r.total }}</td>
+                <td>{{ (r.score / r.total * 100)|round|int if r.total else 0 }}%</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No results yet.</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a class="button" href="/">Back to Home</a>
+    </main>
+</body>
+</html>

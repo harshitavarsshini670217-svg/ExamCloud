@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Take Exam - ExamCloud</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <h1>{{ exam.title }}</h1>
+        <p>{{ exam.description }}</p>
+
+        <form method="POST">
+            <label>Your name:</label>
+            <input type="text" name="student_name" required>
+
+            {% for q in questions %}
+            <section class="card">
+                <h3>{{ loop.index }}. {{ q.question }}</h3>
+
+                {% for letter in ['A', 'B', 'C', 'D'] %}
+                <label class="option">
+                    <input type="radio" name="{{ q.id }}"
+                           value="{{ letter }}" required>
+                    {{ q['option_' + letter.lower()] }}
+                </label>
+                {% endfor %}
+            </section>
+            {% endfor %}
+
+            <button type="submit">Submit Exam</button>
+        </form>
+    </main>
+</body>
+</html>
