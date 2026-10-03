@@ -4,144 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Models | ExamCloud</title>
+    <title>Cloud Models - ExamCloud</title>
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
     <style>
-        .model-grid {
+        .models-container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .models-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
         }
 
         .model-card {
             background: white;
-            padding: 22px;
+            color: #26334a;
+            padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 3px 12px #d1d5db;
-            border-top: 5px solid #4f46e5;
+            box-shadow: 0 4px 14px #00000012;
         }
 
-        .model-card h3 {
-            color: #3730a3;
+        .model-card a {
+            display: inline-block;
+            padding: 11px 18px;
+            background: #5145e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
         }
 
-        .section-title {
-            margin-top: 35px;
-            color: #312e81;
+        .model-card p {
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>ExamCloud</h1>
-        <p>Cloud Computing Models</p>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/results">Results</a>
-            <a href="/cloud-models">Cloud Models</a>
-        </nav>
-    </header>
-
-    <main>
-        <h2>Cloud Service Models</h2>
+    <main class="models-container">
+        <h1>Cloud Model Testing</h1>
         <p>
-            Cloud computing provides computing resources and software
-            through the internet. Explore the three main service models.
+            Learn and demonstrate the three cloud service models.
         </p>
 
-        <div class="model-grid">
+        <div class="models-grid">
             <section class="model-card">
-                <h3>IaaS</h3>
-                <h4>Infrastructure as a Service</h4>
+                <h2>IaaS</h2>
+                <h3>Infrastructure as a Service</h3>
                 <p>
-                    Provides virtual machines, storage and networking.
-                    Users manage the operating system and applications.
+                    Explore infrastructure concepts such as virtual
+                    machines, storage and networking.
                 </p>
-                <p><b>Example:</b> AWS EC2, Azure Virtual Machines</p>
-                <p><b>ExamCloud connection:</b> Virtual infrastructure
-                can host the application server.</p>
+                <p><strong>Example:</strong> AWS EC2</p>
+                <a href="{{ url_for('cloud_test', model='iaas') }}">
+                    Test IaaS
+                </a>
             </section>
 
             <section class="model-card">
-                <h3>PaaS</h3>
-                <h4>Platform as a Service</h4>
+                <h2>PaaS</h2>
+                <h3>Platform as a Service</h3>
                 <p>
-                    Provides a platform for deploying applications
-                    without managing the underlying server infrastructure.
+                    Explore application runtimes, dependencies
+                    and deployment configuration.
                 </p>
-                <p><b>Example:</b> Azure App Service, Google App Engine</p>
-                <p><b>ExamCloud connection:</b> A managed application
-                hosting platform can run our Flask application.</p>
+                <p><strong>Example:</strong> Google App Engine</p>
+                <a href="{{ url_for('cloud_test', model='paas') }}">
+                    Test PaaS
+                </a>
             </section>
 
             <section class="model-card">
-                <h3>SaaS</h3>
-                <h4>Software as a Service</h4>
+                <h2>SaaS</h2>
+                <h3>Software as a Service</h3>
                 <p>
-                    Users access ready-to-use software through a browser
-                    without installing or maintaining the application.
+                    Explore software delivered through a
+                    browser-based application.
                 </p>
-                <p><b>Example:</b> Google Docs, Microsoft 365</p>
-                <p><b>ExamCloud connection:</b> Students use the
-                examination system through a web browser.</p>
-            </section>
-        </div>
-
-        <h2 class="section-title">Cloud Deployment Models</h2>
-
-        <div class="model-grid">
-            <section class="model-card">
-                <h3>Public Cloud</h3>
-                <p>
-                    Cloud infrastructure offered by a provider to
-                    multiple customers.
-                </p>
-                <p><b>Example:</b> AWS, Microsoft Azure</p>
-            </section>
-
-            <section class="model-card">
-                <h3>Private Cloud</h3>
-                <p>
-                    Cloud infrastructure dedicated to one organization.
-                </p>
-                <p><b>Example:</b> An organization's private cloud
-                environment.</p>
-            </section>
-
-            <section class="model-card">
-                <h3>Hybrid Cloud</h3>
-                <p>
-                    Combines private infrastructure with public cloud
-                    services, allowing workloads to use both.
-                </p>
-                <p><b>Example:</b> Private college records combined
-                with public cloud application hosting.</p>
-            </section>
-
-            <section class="model-card">
-                <h3>Community Cloud</h3>
-                <p>
-                    Infrastructure shared by organizations with common
-                    requirements, such as security or compliance.
-                </p>
-                <p><b>Example:</b> A cloud environment shared by
-                educational institutions.</p>
+                <p><strong>Example:</strong> Google Docs</p>
+                <a href="{{ url_for('cloud_test', model='saas') }}">
+                    Test SaaS
+                </a>
             </section>
         </div>
-
-        <h2 class="section-title">Our Project Architecture</h2>
-
-        <section class="card">
-            <p><b>Student browser</b> → Accesses ExamCloud</p>
-            <p><b>Flask application</b> → Displays exams and evaluates answers</p>
-            <p><b>Database</b> → Stores questions and examination results</p>
-            <p><b>GitHub</b> → Stores source code and documentation</p>
-            <p><b>Cloud hosting</b> → Runs the application online</p>
-        </section>
 
         <p>
-            <a class="button" href="/">Return to Home</a>
+            <a href="{{ url_for('home') }}">Back to Home</a>
         </p>
     </main>
 </body>

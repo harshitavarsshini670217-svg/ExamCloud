@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ model.name }} Test - ExamCloud</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .test-container {
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .test-card {
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px #00000012;
+        }
+
+        .test-item {
+            background: #eef2ff;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 15px 10px 0 0;
+            padding: 10px 16px;
+            background: #5145e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <main class="test-container">
+        <h1>{{ model.name }} Demonstration</h1>
+
+        <section class="test-card">
+            <h2>{{ model.full_name }}</h2>
+            <p>{{ model.description }}</p>
+            <p><strong>Example:</strong> {{ model.example }}</p>
+
+            <h3>Test Checklist</h3>
+
+            {% for test in model.tests %}
+                <div class="test-item">
+                    {{ loop.index }}. {{ test }}
+                </div>
+            {% endfor %}
+
+            <p>
+                <strong>Result:</strong>
+                Demonstration checklist displayed successfully.
+            </p>
+
+            <p>
+                These are educational demonstrations, not
+                verified tests of an actual cloud provider.
+            </p>
+        </section>
+
+        <a class="back-link"
+           href="{{ url_for('cloud_models') }}">
+            Back to Cloud Models
+        </a>
+
+        <a class="back-link"
+           href="{{ url_for('home') }}">
+            Home
+        </a>
+    </main>
+</body>
+</html>

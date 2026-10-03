@@ -3,34 +3,191 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ExamCloud</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamCloud - Cloud-Based Examination System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f4f9;
+            color: #243247;
+        }
+
+        header {
+            background: #343184;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        header h1 {
+            font-size: 40px;
+            margin: 15px 0 25px;
+        }
+
+        header p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 32px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 45px auto;
+            padding: 0 18px;
+        }
+
+        main h2 {
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .exam-list {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(280px, 1fr)
+            );
+            gap: 22px;
+        }
+
+        .exam-card {
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.09);
+        }
+
+        .exam-card h3 {
+            font-size: 23px;
+            margin-top: 15px;
+        }
+
+        .exam-card p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .start-button {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 14px 22px;
+            background: #5145e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-size: 18px;
+        }
+
+        .start-button:hover {
+            background: #4035c6;
+        }
+
+        .empty-message {
+            background: white;
+            padding: 24px;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #657086;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            main h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
+    <!-- HEADER -->
     <header>
         <h1>ExamCloud</h1>
+
         <p>Cloud-Based Examination System</p>
+
+        <!-- NAVIGATION -->
         <nav>
-            <a href="/">Home</a>
-            <a href="/results">Results</a>
-            <a href="/cloud-models">Cloud Models</a>
+            <a href="{{ url_for('home') }}">Home</a>
+
+            <a href="{{ url_for('results') }}">Results</a>
+
+            <a href="{{ url_for('cloud_models') }}">Cloud Models</a>
         </nav>
     </header>
 
+    <!-- AVAILABLE EXAMINATIONS -->
     <main>
         <h2>Available Examinations</h2>
 
-        {% for exam in exams %}
-        <section class="card">
-            <h3>{{ exam.title }}</h3>
-            <p>{{ exam.description }}</p>
-            <a class="button" href="{{ url_for('exam', exam_id=exam.id) }}">
-                Start Exam
-            </a>
-        </section>
+        {% if exams %}
+            <div class="exam-list">
+
+                {% for exam in exams %}
+                    <section class="exam-card">
+
+                        <h3>{{ exam.title }}</h3>
+
+                        <p>{{ exam.description }}</p>
+
+                        <a class="start-button"
+                           href="{{ url_for('exam', exam_id=exam.id) }}">
+                            Start Exam
+                        </a>
+
+                    </section>
+                {% endfor %}
+
+            </div>
         {% else %}
-        <p>No exams are available.</p>
-        {% endfor %}
+            <div class="empty-message">
+                <p>No examinations are available currently.</p>
+            </div>
+        {% endif %}
     </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>ExamCloud - Cloud-Based Examination System</p>
+    </footer>
+
 </body>
 </html>
